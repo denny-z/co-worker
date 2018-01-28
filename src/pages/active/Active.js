@@ -13,9 +13,13 @@ export default class Active extends Component {
 
   render() {
     return (
-      <TasksList
-        tasks={this.state.tasks}
-      />
+      <div>
+        <h3>Active tasks</h3>
+        <div>
+          <h4>Tasks list</h4>
+          <TasksList tasks={this.state.tasks}/>
+        </div>
+      </div>
     )
   }
 }
