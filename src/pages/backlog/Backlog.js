@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NewTask from './NewTask';
-import TasksList from './TasksList';
+import TasksList from '../../shared/TasksList';
 import Repository from '../../repositories/Repository';
 
 export default class Backlog extends Component {
@@ -37,7 +37,12 @@ export default class Backlog extends Component {
       <div>
         <h3>Backlog</h3>
         <div>
-          <TasksList tasks={this.state.tasks} onRemove={(task) => this.removeTask(task)} />
+          <h4>Tasks list</h4>
+          <TasksList
+            tasks={this.state.tasks}
+            onRemove={(task) => this.removeTask(task)}
+            onMove={(task) => this.moveToActive(task)}
+          />
         </div>
         <div>
           <h4>Create new task</h4>
