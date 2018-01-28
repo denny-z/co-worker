@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import NewTask from './NewTask';
 import TasksList from './TasksList';
-import TasksRepository from '../../repositories/TasksRepository';
+import Repository from '../../repositories/Repository';
 
 export default class Backlog extends Component {
   constructor() {
     super();
-    this.repo = TasksRepository;
+    this.repo = new Repository('backlogTasks');
     this.state = {
       tasks: this.repo.getAll()
     };
@@ -17,7 +17,8 @@ export default class Backlog extends Component {
     this.setState({
       tasks: tasks,
     });
-    this.repo.saveAll(tasks);
+    this.repo.rewriteAll(tasks);
+  }
   }
 
   removeTask(task) {
@@ -28,7 +29,7 @@ export default class Backlog extends Component {
     this.setState({
       tasks: tasks
     });
-    this.repo.saveAll(tasks);
+    this.repo.rewriteAll(tasks);
   }
 
   render() {
