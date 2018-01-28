@@ -6,9 +6,9 @@ import {
   Link
 } from 'react-router-dom';
 
-import Archive from './Archive';
-import Active from './Active';
-import Backlog from './Backlog';
+import Archive from './pages/archive/Archive';
+import Active from './pages/active/Active';
+import Backlog from './pages/backlog/Backlog';
 
 class App extends Component {
   render() {
