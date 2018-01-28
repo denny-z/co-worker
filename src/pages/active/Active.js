@@ -1,7 +1,21 @@
 import React, {Component} from 'react';
+import TasksList from '../../shared/TasksList';
+import Repository from '../../repositories/Repository';
 
 export default class Active extends Component {
-  render(){
-    return <div>This is active</div>
+  constructor() {
+    super();
+    this.repo = new Repository('activeTasks');
+    this.state = {
+      tasks: this.repo.getAll()
+    };
+  }
+
+  render() {
+    return (
+      <TasksList
+        tasks={this.state.tasks}
+      />
+    )
   }
 }
