@@ -5,26 +5,29 @@ import TasksRepository from '../../repositories/TasksRepository';
 export default class Backlog extends Component {
   constructor() {
     super();
-    this.repo = new TasksRepository();
+    this.repo = TasksRepository;
     this.state = {
-      tasks: this.repo.getAll() || []
+      tasks: this.repo.getAll()
     };
   }
 
   addTask(newTask) {
+    let tasks = this.state.tasks.concat([newTask]);
     this.setState({
-      tasks: this.state.tasks.concat([newTask]),
+      tasks: tasks,
     });
-    this.repo.save(newTask);
+    this.repo.saveAll(tasks);
   }
 
   removeTask(task) {
     let tasks = this.state.tasks.slice();
     let index = tasks.indexOf(task);
     tasks.splice(index, 1);
+
     this.setState({
       tasks: tasks
     });
+    this.repo.saveAll(tasks);
   }
 
   renderTasksList() {
