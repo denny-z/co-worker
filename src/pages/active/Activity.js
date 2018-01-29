@@ -21,7 +21,7 @@ export default class Activity extends Component {
     } else {
       return activities.map((a) => {
           return (
-            <div>
+            <div key={a.start + a.stop}>
               <span>Start {this.formatDate(a.start)} </span>
               <span>Stop {this.formatDate(a.stop)}</span>
             </div>
