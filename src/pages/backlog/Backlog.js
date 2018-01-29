@@ -9,33 +9,35 @@ export default class Backlog extends Component {
     super();
     this.repo = new Repository('backlogTasks');
     this.activeRepo = new Repository('activeTasks');
-    this.state = {
-      tasks: this.repo.getAll()
-    };
+    this.state = {tasks: []}
+    this.repo.getAll().then((tasks) => {
+      this.setState({tasks: tasks})
+    })
   }
 
   addTask(newTask) {
-    let tasks = this.state.tasks.concat([newTask]);
-    this.setState({
-      tasks: tasks,
-    });
-    this.repo.rewriteAll(tasks);
+    this.repo.create(newTask).then((task)=> {
+      this.setState({
+        tasks: this.state.tasks.concat([task])
+      });
+    })
   }
 
   moveToActive(task) {
     this.removeTask(task);
-    this.activeRepo.save(task);
+    this.activeRepo.create(task);
   }
 
   removeTask(task) {
-    let tasks = this.state.tasks.slice();
-    let index = tasks.indexOf(task);
-    tasks.splice(index, 1);
+    this.repo.remove(task).then(() => {
+      let tasks = this.state.tasks.slice();
+      let index = tasks.indexOf(task);
+      tasks.splice(index, 1);
 
-    this.setState({
-      tasks: tasks
-    });
-    this.repo.rewriteAll(tasks);
+      this.setState({
+        tasks: tasks
+      });
+    })
   }
 
   render() {
