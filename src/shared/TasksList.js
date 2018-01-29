@@ -5,8 +5,8 @@ export default class TasksList extends Component {
     return this.props.tasks.map((task, index) => {
       return (
         <li key={task.name + index}>
-          <p>Name: {task.name}</p>
-          <p>Description: {task.description}</p>
+          <div>Name: {task.name}</div>
+          <div>Description: {task.description}</div>
           {this.renderChildren(task)}
         </li>);
     });
@@ -14,7 +14,7 @@ export default class TasksList extends Component {
 
   renderChildren(task) {
     return React.Children.map(this.props.children, (child) => {
-      return (<p>{this.renderChild(child, task)}</p>)
+      return (<div>{this.renderChild(child, task)}</div>)
     })
   }
 
