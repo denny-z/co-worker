@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 export default class TasksList extends Component {
   renderTasks() {
-    console.log(this.props.children)
     return this.props.tasks.map((task, index) => {
       return (
         <li key={task.name + index}>
