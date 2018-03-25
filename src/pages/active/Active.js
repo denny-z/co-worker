@@ -15,6 +15,27 @@ export default class Active extends Component {
     })
   }
 
+  isTaskAcivitiesEmpty(task) {
+    return task.activities == null || task.activities.length == 0;
+  }
+
+  needToShowStartTimer(task) {
+    if(this.isTaskAcivitiesEmpty(task)) {
+      return true;
+    }
+    const latestActivity = task.activities[task.activities.length - 1];
+    return latestActivity.stop != null;
+  }
+
+  needToShowStopTimer(task) {
+    if(this.isTaskAcivitiesEmpty(task)) {
+      return false;
+    }
+
+    const latestActivity = task.activities[task.activities.length - 1];
+    return latestActivity.stop == null;
+  }
+
   startTrack(task) {
     task.activities = (task.activities || []).concat(
       [{start: this.getNow()}]
@@ -54,7 +75,9 @@ export default class Active extends Component {
           <h4>Tasks list</h4>
           <TasksList tasks={this.state.tasks}>
             <Timer
+              needShowStart={(task) => this.needToShowStartTimer(task)}
               onStart={(task) => this.startTrack(task)}
+              needShowStop={(task) => this.needToShowStopTimer(task)}
               onStop={(task) => this.stopTrack(task)}
             />
             <Activity />
