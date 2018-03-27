@@ -3,6 +3,7 @@ import TasksList from '../../shared/TasksList';
 import Repository from '../../repositories/Repository';
 import Timer from './Timer';
 import Activity from './Activity';
+import TimeSpent from './TimeSpent';
 import moment from 'moment';
 
 export default class Active extends Component {
@@ -74,6 +75,7 @@ export default class Active extends Component {
         <div>
           <h4>Tasks list</h4>
           <TasksList tasks={this.state.tasks}>
+            <TimeSpent />
             <Timer
               needShowStart={(task) => this.needToShowStartTimer(task)}
               onStart={(task) => this.startTrack(task)}
